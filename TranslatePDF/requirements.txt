@@ -3,3 +3,4 @@ requests
 PyPDF2
 pymupdf
 fpdf
+python-dotenv
