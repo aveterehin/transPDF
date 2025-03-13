@@ -2,3 +2,4 @@ flask
 requests
 PyPDF2
 pymupdf
+fpdf
