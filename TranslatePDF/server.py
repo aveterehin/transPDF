@@ -2,7 +2,7 @@ import os
 import fitz  # PyMuPDF
 import requests
 from fpdf import FPDF
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, render_template
 from dotenv import load_dotenv
 
 # Загружаем переменные окружения из .env файла
@@ -46,6 +46,11 @@ def save_text_to_pdf(text, output_pdf):
     pdf.multi_cell(190, 10, text)
     pdf.output(output_pdf)
 
+@app.route("/")
+def home():
+    """Главная страница"""
+    return render_template("main.html")
+
 @app.route("/upload", methods=["POST"])
 def upload_pdf():
     """Загружает и переводит PDF"""
@@ -68,8 +73,6 @@ def upload_pdf():
 def download_pdf():
     """Отдаёт переведённый PDF"""
     return send_file("translated.pdf", as_attachment=True)
-
-import os
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
